@@ -1,0 +1,8 @@
+.containerContactList{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.containerContacts{
+    text-align: center;
+}
