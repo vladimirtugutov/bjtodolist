@@ -1,68 +1,46 @@
-import * as types from '../types/contacts';
+import * as types from '../types/todos';
 
-export default function contactReducer(state = {}, action) {
+export default function todoReducer(state = {}, action) {
   const { type, payload } = action;
 
   switch (type) {
-    case types.CREATE_CONTACT: {
+    case types.CREATE_TODO: {
       const newState = { ...state };
       newState.loading = true;
       newState.error = null;
       return newState;
     }
 
-    case types.CREATE_CONTACT_SUCCESS: {
+    case types.CREATE_TODO_SUCCESS: {
       const newState = { ...state };
       newState.loading = false;
       newState.error = null;
-      newState.data = [...newState.data, payload.data];
+      newState.data = [...newState.data, payload];
       return newState;
     }
 
-    case types.CREATE_CONTACT_ERROR: {
+    case types.CREATE_TODO_ERROR: {
       const newState = { ...state };
       newState.loading = false;
       newState.error = payload;
       return newState;
     }
 
-    case types.DELETE_CONTACT: {
+    case types.INIT_TODO: {
       const newState = { ...state };
       newState.loading = true;
       newState.error = null;
       return newState;
     }
 
-    case types.DELETE_CONTACT_SUCCESS: {
-      const newState = { ...state };
-      newState.loading = false;
-      newState.error = null;
-      newState.data = newState.data.filter((contact) => contact.id !== Number(payload.id));
-      return newState;
-    }
-
-    case types.DELETE_CONTACT_ERROR: {
+    case types.INIT_TODO_ERROR: {
       const newState = { ...state };
       newState.loading = false;
       newState.error = payload;
       return newState;
     }
 
-    case types.INIT_CONTACT: {
-      const newState = { ...state };
-      newState.loading = true;
-      newState.error = null;
-      return newState;
-    }
-
-    case types.INIT_CONTACT_ERROR: {
-      const newState = { ...state };
-      newState.loading = false;
-      newState.error = payload;
-      return newState;
-    }
-
-    case types.INIT_CONTACT_SUCCESS: {
+    case types.INIT_TODO_SUCCESS: {
       const newState = { ...state };
       newState.loading = false;
       newState.error = null;
@@ -70,24 +48,47 @@ export default function contactReducer(state = {}, action) {
       return newState;
     }
 
-    case types.EDIT_CONTACT: {
+    case types.EDIT_TODO: {
       const newState = { ...state };
       newState.loading = true;
       newState.error = null;
       return newState;
     }
 
-    case types.EDIT_CONTACT_ERROR: {
+    case types.EDIT_TODO_SUCCESS: {
+      const newState = { ...state };
+      newState.loading = false;
+      newState.error = null;
+      newState.data = newState.data.map((todo) => {
+        if (todo.id === payload.id) {
+          // eslint-disable-next-line no-param-reassign
+          todo.text = payload.text;
+          // eslint-disable-next-line no-param-reassign
+          todo.edited = true;
+        }
+        return todo;
+      });
+      return newState;
+    }
+
+    case types.EDIT_TODO_ERROR: {
       const newState = { ...state };
       newState.loading = false;
       newState.error = payload;
       return newState;
     }
 
-    case types.SEARCH_CONTACT_ERROR: {
+    case types.TOGGLE_TODO_SUCCESS: {
       const newState = { ...state };
       newState.loading = false;
-      newState.error = payload;
+      newState.error = null;
+      newState.data = newState.data.map((todo) => {
+        if (todo.id === payload) {
+          // eslint-disable-next-line no-param-reassign
+          todo.status = !todo.status;
+        }
+        return todo;
+      });
       return newState;
     }
 

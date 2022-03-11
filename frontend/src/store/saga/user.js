@@ -7,26 +7,14 @@ function* loginUser(action) {
   const { payload } = action;
   try {
     const { data } = yield call(() => axios.post('http://localhost:5000/api/auth/signin', payload, { withCredentials: true }));
-    if (data.username === 'Данные введены неверно!') {
+    if (data.login === 'Данные введены неверно!') {
       // eslint-disable-next-line no-alert
-      alert(data.username);
+      alert('Wrong credentials! Invalid username or password');
     } else {
       yield put(actions.authUserSuccess(data));
     }
   } catch (error) {
     yield put(actions.authUserError(error));
-  }
-}
-
-function* regUser(action) {
-  const { payload } = action;
-  try {
-    const { data } = yield call(() => axios.post('http://localhost:5000/api/auth/register', payload, { withCredentials: true }));
-    yield put(actions.regUserSuccess(data));
-  } catch (error) {
-    // eslint-disable-next-line no-alert
-    alert('Пользователь не зарегистрирован. Возможно пользователь с такими учетными данными уже существует.');
-    yield put(actions.regUserError(error));
   }
 }
 
@@ -56,7 +44,6 @@ function* checkAuthUser() {
 
 export default function* usersSaga() {
   yield takeEvery(types.AUTH_USER_START, loginUser);
-  yield takeEvery(types.REG_USER_START, regUser);
   yield takeEvery(types.LOGOUT_USER_START, logoutUser);
   yield takeEvery(types.CHECK_AUTH_START, checkAuthUser);
 }

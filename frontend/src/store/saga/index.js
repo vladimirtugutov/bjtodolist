@@ -1,7 +1,7 @@
 import { all } from 'redux-saga/effects';
-import contactSaga from './contacts';
+import todoSaga from './todos';
 import userSaga from './user';
 
 export default function* rootSaga() {
-  yield all([userSaga(), contactSaga()]);
+  yield all([userSaga(), todoSaga()]);
 }

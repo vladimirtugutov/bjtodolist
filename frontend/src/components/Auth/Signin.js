@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import {
   Form, Input, Button, Row,
@@ -14,8 +14,8 @@ const Signin = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (userSlice.user?.username) {
-      navigate('/feed');
+    if (userSlice.user?.login) {
+      navigate('/');
     }
   }, [userSlice.user]);
 
@@ -26,7 +26,7 @@ const Signin = () => {
   };
   return (
     <div className="Auth">
-      <h1 className="containerContactList">Авторизация пользователя</h1>
+      <h1 className="containerList">User authorization</h1>
       <Row justify="center" align="middle">
         <Form
           name="normal_login"
@@ -37,39 +37,36 @@ const Signin = () => {
           onFinish={onFinish}
         >
           <Form.Item
-            name="email"
+            name="login"
             rules={[
               {
                 required: true,
-                message: 'Введите Ваш email!',
+                message: 'Please enter your username!',
               },
             ]}
           >
-            <Input prefix={<UserOutlined className="site-form-item-icon" />} placeholder="Email" />
+            <Input prefix={<UserOutlined className="site-form-item-icon" />} placeholder="login" />
           </Form.Item>
           <Form.Item
             name="password"
             rules={[
               {
                 required: true,
-                message: 'Введите Ваш пароль!',
+                message: 'Please enter your password!',
               },
             ]}
           >
             <Input
-              prefix={<LockOutlined className="site-form-item-icon" />}
+              prefix={<LockOutlined />}
               type="password"
-              placeholder="Password"
+              placeholder="password"
             />
           </Form.Item>
 
           <Form.Item>
-            <Button type="primary" htmlType="submit" className="login-form-button">
-              Войти
+            <Button type="primary" htmlType="submit">
+              Login
             </Button>
-            {' '}
-            или
-            <Link to="/signup"> зарегистрироваться</Link>
           </Form.Item>
         </Form>
       </Row>

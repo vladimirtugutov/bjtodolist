@@ -19,11 +19,6 @@ export default function usersReducer(state = {}, action) {
       newState.user = { ...payload };
       return newState;
     }
-    case types.REG_USER_SUCCESS: {
-      const newState = JSON.parse(JSON.stringify(state));
-      newState.user = { ...payload };
-      return newState;
-    }
 
     default: {
       return state;
