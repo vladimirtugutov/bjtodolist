@@ -2,12 +2,13 @@ import { Outlet, useNavigate } from 'react-router-dom';
 import { Button, Space, Row } from 'antd';
 import { useSelector, useDispatch } from 'react-redux';
 import { logoutUserStart } from '../../store/actions/user';
+import './Navigation.css';
 
 export default function Navigation() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const userSlice = useSelector((store) => store.userSlice);
-  const isAuth = userSlice.user?.username;
+  const isAuth = userSlice.user?.login;
 
   function logout() {
     try {
@@ -20,32 +21,26 @@ export default function Navigation() {
 
   return (
     <>
-      <nav
-        style={{
-          borderBottom: 'solid 1px',
-          paddingBottom: '1rem',
-          paddingTop: '1rem',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-        }}
-      >
+      <nav className="navbar">
         <Space direction="horizontal" align="center" size="large">
+          <Button className="title-fint-adler" type="link" onClick={() => navigate('/')}>
+            Main
+          </Button>
           {isAuth ? (
             <Row>
               <Button className="title-fint-adler" type="link">
-                Вы авторизованы как
+                Welcome,
                 {' '}
                 {isAuth}
               </Button>
               <Button className="title-fint-adler" type="link" onClick={() => logout()}>
-                Выход
+                Logout
               </Button>
             </Row>
           )
             : (
               <Button className="title-fint-adler" type="link" onClick={() => navigate('/signin')}>
-                Вход
+                Login
               </Button>
             )}
         </Space>

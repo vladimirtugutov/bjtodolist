@@ -45,19 +45,3 @@ export const checkAuthError = (payload) => ({
   type: types.CHECK_AUTH_ERROR,
   payload,
 });
-
-// Регистрация новых пользователей
-export const regUserSuccess = (payload) => ({
-  type: types.REG_USER_SUCCESS,
-  payload,
-});
-
-export const regUserError = (payload) => ({
-  type: types.REG_USER_ERROR,
-  payload,
-});
-
-export const regUserStart = (payload) => ({
-  type: types.REG_USER_START,
-  payload,
-});

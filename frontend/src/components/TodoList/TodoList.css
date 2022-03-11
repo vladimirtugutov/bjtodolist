@@ -1,8 +1,8 @@
-.containerContactList{
+.containerList{
     display: flex;
     align-items: center;
     justify-content: center;
 }
-.containerContacts{
+.container{
     text-align: center;
 }

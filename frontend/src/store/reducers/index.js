@@ -1,9 +1,9 @@
 import { combineReducers } from 'redux';
-import contactReducer from './contacts';
+import todoReducer from './todos';
 import userReducer from './user';
 
 const reducerSpec = {
-  contactSlice: contactReducer,
+  todoSlice: todoReducer,
   userSlice: userReducer,
 };
 

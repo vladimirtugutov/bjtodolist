@@ -9,7 +9,7 @@ import rootReducer from './reducers';
 const sagaMiddleware = createSagaMiddleware();
 
 const initialState = {
-  contactSlice: {
+  todoSlice: {
     loading: false,
     error: null,
     data: [],

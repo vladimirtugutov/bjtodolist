@@ -1,10 +1,9 @@
 import { useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 import { Routes, Route } from 'react-router-dom';
-import ContactList from './components/ContactList';
+import TodoList from './components/TodoList';
 import Navigation from './components/Navigation';
 import Signin from './components/Auth/Signin';
-import Signup from './components/Auth/Signup';
 
 import * as actionsUser from './store/actions/user';
 
@@ -18,12 +17,9 @@ function App() {
   return (
     <Routes>
       <Route path="/" element={<Navigation />}>
-        <Route index element={<Signin />} />
-
-        <Route path="feed" element={<ContactList />} />
+        <Route index element={<TodoList />} />
 
         <Route path="signin" element={<Signin />} />
-        <Route path="signup" element={<Signup />} />
       </Route>
     </Routes>
   );
